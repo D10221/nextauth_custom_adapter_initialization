@@ -1,0 +1,20 @@
+{
+  "name": "next-auth-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=\"--inspect\" next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "9.5.1",
+    "next-auth": "../next-auth",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
+}
