@@ -41,8 +41,8 @@ const standardAdapter = process.env.NEXTAUTH_DATABASE_ADAPTER === "standard";
 console.log("standardAdapter: ", standardAdapter);
 
 /** */
-const options_initializable = {
-  adapter_mode: "initializable",
+const options_standard  = {
+  adapter_mode: "standard",
   adapter: Adapters.TypeORM.Adapter(databaseUrl),
   providers: [
     Providers.Credentials({
@@ -57,7 +57,7 @@ const options_initializable = {
       },
       authorize: async function authorize({ username, password }) {
         try {
-          const _adapter = await options_initializable.adapter.getAdapter();
+          const _adapter = await options_standard.adapter.getAdapter();
           // initialize users (once)
           await initializeUsers(_adapter);
           // ... authorize
@@ -74,8 +74,8 @@ const options_initializable = {
   jwt: {},
 };
 /** */
-const options_standard = {
-  adapter_mode: "standard",
+const options_initializable = {
+  adapter_mode: "initializable",
   // accepts initialization
   adapter: (database, options) => Adapters.TypeORM.Adapter(database, options),
   // database decoupled from 'Adapter'
@@ -94,7 +94,7 @@ const options_standard = {
       authorize: async function authorize({ username, password }) {
         try {
           // self reference:
-          const _adapter = await options_standard
+          const _adapter = await options_initializable
             .adapter(options.database)
             .getAdapter();
           // initialize users (once)
